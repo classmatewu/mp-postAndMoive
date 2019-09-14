@@ -1,0 +1,43 @@
+/* pages/movies/template/movieList-template.wxss */
+@import "./movie-template.wxss";
+
+/* 整个大容器的元素成列排布 */
+.movieList-container {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #a60; */
+    width: 90%;
+    margin: 15rpx auto;
+}
+
+/* .inner-container{
+    margin: 0 auto 20rpx;
+} */
+
+/* header容器元素行排布 */
+.movieList-head {
+    display: flex;
+    justify-content: space-between; /*将元素在header容器分两端排*/
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15rpx;
+}
+
+/* movieList-movies容器元素行排布 */
+.movieList-movies {
+    display: flex;
+    /* flex-direction: row;
+    align-items: center; */
+    justify-content: space-between;
+    /* background-color: yellow; */
+}
+
+.more-img {
+    width: 9rpx;
+    height: 16rpx;
+    margin-left: 10rpx;
+}
+
+.more-text {
+    color:blueviolet;
+}

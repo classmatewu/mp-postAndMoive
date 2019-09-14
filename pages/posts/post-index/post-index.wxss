@@ -1,0 +1,16 @@
+/* pages/posts/posts.wxss */
+/* 轮播图1的样式 */
+/* 这里设置好图片的尺寸样式后发现还是不能完全显示，原因是swiper组件有一个默认的宽高值，而这个宽高值大于swiper-item组件里的图片宽高，而swiper-item默认是充满整个swiper容器的，所以图片不能完全显示；又由于swiper-item的宽高由swiper组件决定，所以我们必须设置swiper的宽高 */
+swiper {
+    width: 100%;  /*这里也可以用满屏时的宽度*/
+    height: 600rpx;
+    padding-bottom: 20rpx; /* 设置内下边距 */
+    border-bottom: 1px solid #ededed; /* 设置下边框 */
+}
+swiper image {
+    width: 100%;  /*这里也可以用满屏时的宽度*/
+    height: 600rpx;
+}
+
+/* post容器样式 */
+@import "../../template/post-template.wxss";

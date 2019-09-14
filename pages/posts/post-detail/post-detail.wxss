@@ -1,0 +1,91 @@
+/* pages/posts/post-detail/post-detail.wxss */
+.theme-img {
+    width: 100%;
+    height: 500rpx;
+}
+
+.anthor-avatar {
+    width: 60rpx;
+    height: 60rpx;
+    margin: 0 20rpx;
+}
+
+.tool-img image {
+    width: 90rpx;
+    height: 90rpx;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20rpx;
+}
+
+.author-name {
+    color: #999;
+    margin-right: 20rpx;
+}
+
+.post-time {
+    color: #999;
+    margin: 0 20rpx;
+}
+
+.post-title {
+    font-size: 35rpx;
+    font-weight: bold;
+    margin: 30rpx 0 0 35rpx; 
+}
+
+.tool {
+    margin-top: 20rpx;
+}
+
+.tool-img {
+    float: right;
+    margin-right: 40rpx;
+    vertical-align: middle;
+}
+
+.share-img {
+    margin-left: 30rpx;
+}
+
+/* 设置线条样式，包括重叠等 */
+.tool-line {
+    width: 660rpx;
+    height: 1px;  /* 这里不能让线随屏幕增大而变粗，所以最好用px固定的 */ 
+    background-color: #e5e5e5;
+    vertical-align: middle;
+    position: relative; /* 脱离文档流 */
+    top: 46rpx;
+    margin: 0 auto;
+    z-index: -99; /* 设置重叠 */
+}
+
+.post-content {
+    margin: 30rpx;
+    color: #666;
+}
+
+.post-top {
+    position: relative;
+}
+
+/* 设置音乐图标位置，位于顶部图片的中心 */
+.music-img {
+    width: 102rpx;
+    height: 100rpx;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

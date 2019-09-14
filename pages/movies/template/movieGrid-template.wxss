@@ -1,0 +1,6 @@
+@import "./movie-template.wxss";
+
+.moreGrid-aMovie {
+    float: left;
+    margin: 0 0 30rpx 38rpx;
+}

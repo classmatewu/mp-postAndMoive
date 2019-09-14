@@ -1,0 +1,24 @@
+<!--pages/movies/template/movieList-template.wxml-->
+<import src="./movie-template.wxml" />
+
+<template name="movieList-template">
+    <view class="movieList-container">
+        <!-- <view class="inner-container"> -->
+        <!--这个容器比较特殊，因为设置flex布局是脱离了文档流，所以若没有这个标签话，那么设置movieList-head中元素位于父容器两端的话就是相当于页面了，因为movieList-container为flex布局脱离了文档流，再往上就是整个页面了-->
+        <view class="movieList-head">
+            <text class="movieList-type">{{ moviesType }}</text>
+            <view catchtap="intoMoreMovie" data-moviestype="{{ moviesType }}" class="more-container">
+                <text class="more-text">更多</text>
+                <image class="more-img" src="/images/icon/arrow-right.png"></image>
+            </view>
+        </view>
+        <!-- </view> -->
+        <view class="movieList-movies">
+            <block wx:for="{{ movies }}" wx:for-item="aMovie">
+                <template is="movie-template" data="{{ ...aMovie }}" />
+            </block>
+                <!-- <template is="movie-template" />
+                <template is="movie-template" /> -->
+        </view>
+    </view>
+</template>

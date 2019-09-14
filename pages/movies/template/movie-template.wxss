@@ -1,0 +1,18 @@
+/* pages/movies/template/movie-template.wxss */
+@import "./star-template.wxss";
+
+.movie-container {
+    display: flex;
+    flex-direction: column;
+    /* margin:  0; */
+}
+
+.movie-poster {
+    width: 200rpx;
+    height: 270rpx;
+}
+
+.movie-name {
+    color: #333;
+    margin-top: 15rpx;
+}

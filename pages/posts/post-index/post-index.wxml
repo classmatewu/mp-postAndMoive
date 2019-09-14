@@ -1,0 +1,60 @@
+<!--pages/posts/posts.wxml-->
+<!-- 
+  笔记：
+1、swiper是一个轮播图组件容器，swiper-item是轮播图组件的子项组件容器，
+注意，swiper-item组件是默认充满整个swiper的，所以如果在swiper-item组件容器中放了一张图片，
+而要设置图片的宽高，若swiper-item组件放不下，则应该swiper的宽高，因为swiper-item默认是充满整个swiper的
+2、
+ -->
+
+<!-- 引入post-template模板 -->
+<import src="../../template/post-template.wxml" />
+<!--注意路径要写准确，这里相对跟绝对都可以，但要准确-->
+
+<view>
+    <!-- 注意这里几个属性的值，虽然它们都是true，但注意它们都是包裹在""里的，也就是说它们其实是String而不是布尔值，它们是反义是""空字符串，而不是false，所以为了让它变成真正的布尔值，在书写它们时好的习惯一般是给它们加上{{}}，即利用数据绑定，而在js的data里若没有定义true和false的值，则它们默认是布尔值，也就是说加上{{}}后它们才是布尔值，否则就是String类型 -->
+    <swiper 
+        indicator-dots="true" 
+        autoplay="true" 
+        interval="2000" 
+        vertical=true
+        circular="true"
+        catch:tap="intoPostDetail2"
+    >
+        <!-- 添加的属性都是swiper组件的特定属性，分别是设置轮播图的指示点、轮播自动轮播，自动轮播间隔时间（ms）、纵向轮播，衔接滑动等，它们不设置时也有默认值，具体看swiper组件文档 -->
+        <!-- 顶部轮播图 -->
+        <swiper-item>
+            <image src="/images/wx.png" data-postid="3"></image>
+        </swiper-item>
+
+        <!-- 轮播图2 -->
+        <swiper-item>
+            <image src="/images/iqiyi.png" data-postid="2"></image>
+        </swiper-item>
+
+        <!-- 轮播图3 -->
+        <swiper-item>
+            <image src="/images/vr.png" data-postid="1"></image>
+        </swiper-item>
+        <!-- 由于轮播图页面没有什么信息，所以我们得手动地来加上id，像下面一样利用id来作为下标进行匹配具体文章 -->
+    </swiper>
+
+    <!-- 文章post1 -->
+    <!-- 虽然for循环指令也可以放在view中，但我们一般用block标签来放，这是一个良好习惯，也方便实现模板化时 -->
+    <block wx:for="{{ postKey }}" wx:for-item="item" wx:for-index="index" wx:key="index">
+        <!-- 这里要加wx:key;否则调试器会警告，在某些情况下加这个由性能的提高，每个key值要不一样，但尽量不要用index -->
+
+<!-- 注意，这里给文章绑定事件，不能写在template标签上，因为它是一个模板标签，引入文件后就会被替换删掉，所以这里我们用了一个view标签来包裹，将事假绑定写在上面 -->
+        <view catch:tap="intoPostDetail" data-postId="{{ item.postId }}">
+        <!-- 将item.postId传给自定义属性data-xxx，然后才可以被js中的特定的函数来访问到 -->
+        <!-- 注意在页面post-index加载完页面后，每篇文章都有一个postid，postid又设置等于postList文章数组的下标，所以我们便利用这个postid作为数组的下标去匹配每一篇文章 -->
+
+            <template is="post-template" data="{{ ...item }}" /> <!-- / 不要忘了加 -->
+            <!-- 注意，这里用template引入指定路径的模板，用is表示模板名，且这里的数据要重新data="{{ item }}" -->
+            <!-- 另外，在item变量前加...则html代码引用对象的内容就不用通过item.来访问了，因为它相当于把对象平铺开来，把对象分散开来变成里面的各个值，所以可以直接访问了 -->
+
+        </view>
+    </block>
+
+
+</view>

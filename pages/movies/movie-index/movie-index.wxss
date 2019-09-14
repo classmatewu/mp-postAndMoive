@@ -1,0 +1,8 @@
+/* pages/movies/movie-index/movie-index.wxss */
+@import "../template/movieList-template.wxss";
+
+.movieList-line {
+    width: 100%;
+    height: 25rpx;
+    background-color:gainsboro;
+}

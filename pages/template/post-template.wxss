@@ -1,0 +1,58 @@
+/* post容器 */
+.post {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20rpx;
+    border-bottom: 1px solid #ededed; /* 设置下边框 */
+}
+/* 文章作者头像 */
+.post-author-avatar {
+    width: 60rpx;
+    height: 60rpx;
+    margin-right: 30rpx;
+}
+/* 文章图片 */
+.post-image {
+    width: 100%;
+    height: 375rpx;
+    margin: 20rpx 0 0 0;
+}
+/* 浏览信息图标 */
+.post-look image {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 20rpx;
+}
+/* 浏览信息文字 */
+.post-look text {
+    margin-right: 40rpx;
+}
+/* 给文章作者信息的view设置为flex布局，并使其中的元素垂直排布 */
+.post-author {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 10rpx 0 10rpx 10rpx;
+}
+/* 文章标题 */
+.post-title {
+    font-size: 34rpx;
+    color: #333;
+    font-weight: bold;
+    margin: 10rpx 0 0 20rpx;  /* 为什么这里底部外边距设置无效呢？ */
+    /* margin-bottom: 30rpx; */
+}
+/* 文本内容 */
+.post-content {
+    font-size: 28rpx;
+    color: #666;
+    letter-spacing: 2rpx; /* 字距 */
+    margin: 0 20rpx 20rpx 20rpx;
+}
+/* 浏览信息容器 */
+.post-look {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20rpx;
+}

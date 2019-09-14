@@ -1,0 +1,9 @@
+<import src="./movie-template.wxml" />
+
+<template name="movieGrid-template">
+    <block wx:for="{{ allMoviesData }}" wx:for-item="aMovie">
+        <view class="moreGrid-aMovie">
+            <template is="movie-template" data="{{ ...aMovie }}" />
+        </view>
+    </block>
+</template>

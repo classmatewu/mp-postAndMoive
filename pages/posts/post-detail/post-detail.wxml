@@ -1,0 +1,45 @@
+<!--pages/posts/post-detail/post-detail.wxml-->
+<view class="container">
+    <!-- 文章顶部图片 -->
+    <view class="post-top">
+        <image src="{{ img.postImg }}" class="theme-img"></image>
+        <image src="{{ img.musicStartImg }}" class="music-img"></image>
+    </view>
+
+    <!-- 作者信息以及发表时间 -->
+    <view class="author-info">
+        <!-- 作者头像 -->
+        <image src="{{ img.authorImg }}" class="anthor-avatar"></image>
+        <!-- 作者名称 -->
+        <text class="author-name">{{ authorName }}</text>
+        <!-- 发表时间 -->
+        <text class="post-time">发表于 {{ postTime }}</text>
+    </view>
+
+    <!-- 文章标题 -->
+    <text class="post-title">{{ title }}</text>
+
+    <!-- 横线、收藏及分享图片按钮 -->
+    <view class="tool">
+        <view class="tool-img">
+            <image 
+                wx:if="{{ collected }}"
+                src="{{ img.collectionImgSrc }}" 
+                catch:tap="changeCollected" 
+                class="collect-img"
+            ></image>
+            <image 
+                wx:else
+                src="/images/icon/collection-anti.png" 
+                catch:tap="changeCollected" 
+                class="collect-img"
+            ></image>
+            <image src="{{ img.shareImgSrc }}" class="share-img"></image>
+        </view>
+        <view class="tool-line"></view>
+    </view>
+
+    <!-- 文章内容 -->
+    <text class="post-content">{{ detail }}</text>
+
+</view>

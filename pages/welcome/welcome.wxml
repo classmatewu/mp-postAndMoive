@@ -1,0 +1,12 @@
+<!--pages/welcome/welcome.wxml-->
+<!-- index.html -->
+<view class="index-container">
+  <!-- 注意放入的图片是有一定默认宽高的，所以一般我们都要去再设置一下图片的宽高样式 -->
+  <image class="index-avatar" src="/images/avatar/1.png"></image>
+  <text class="index-text">hello, ZL</text>
+  <!-- <button class="index-button">开启小程序之旅</button> -->
+  <!-- 虽然按钮最好用button，但我们这里为了按钮的样式比较好看，我们用text标签，
+  让按钮背景色与整体背景色一样，再设置按钮圆角 -->
+  <text class="index-button" bind:tap="jumpInto">开启小程序之旅</text>
+  <!-- tap指手指触摸后离开事件，即点击事件 -->
+</view>

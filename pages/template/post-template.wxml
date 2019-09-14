@@ -1,0 +1,25 @@
+<!-- 记得给该模板的wxml文件加个name属性用来命名 -->
+<!-- 注意，这里不要忘了加template标签，name属性也是在template标签里的，而不是在view标签里的 -->
+<!-- 前面用了一个小技巧，即在item变量前加三个小点平铺对象，就可以不用item.来访问对象里的变量了，这样代码也更容易理解一点 -->
+<template name="post-template">
+    <view class="post">
+        <!-- 作者信息 -->
+        <view class="post-author">
+            <image class="post-author-avatar" src="{{ img.authorImg }}"></image>
+            <text class="post-author-date">{{ date }}</text>
+        </view>
+        <!-- 文章标题 -->
+        <text class="post-title">{{ title }}</text>
+        <!-- 文章图片 -->
+        <image class="post-image" src="{{ img.postImg }}"></image>
+        <!-- 文章内容 -->
+        <text class="post-content">{{ content }}</text>
+        <!-- 浏览信息 -->
+        <view class="post-look">
+            <image src="/images/icon/chat.png"></image>
+            <text>{{ starNum }}</text>
+            <image src="/images/icon/view.png"></image>
+            <text>{{ viewNum }}</text>
+        </view>
+    </view>
+</template>

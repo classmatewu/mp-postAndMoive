@@ -1,0 +1,14 @@
+/* pages/movies/more-movie/more-movie.wxss */
+@import "../template/movieGrid-template.wxss";
+
+page {
+    /* background-color: red; */
+    /* height: 100%; */
+    /* width: 100%; */
+}
+
+.more-movie {
+    height: 1300; /* 使用scroll-view标签时，设置这个高度后才会触发触底触发函数 */
+    margin-top: 30rpx;
+    /* background-color: yellow; */
+}
