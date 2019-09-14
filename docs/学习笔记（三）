@@ -1,0 +1,75 @@
+1、template小程序模板化编程，利用template，可以将一部分独立课多复用的html、css代码封装为一个模板，
+作为一个模板，所以在任何页面都可以引用这个模板，只需要在html和css文件中各用一句话引入该模板的html和css文件
+    1）在html文件中:<import src="../template/post-template.wxml" /> 注意，这里的路径用相对和绝对路径都可以
+    2）在css文件中:@import "../template/post-template.wxss"; 注意，这里的路径用相对和绝对路径都可以
+注意template只能封装wxml和wxss样式，但不能封装它的业务逻辑js代码，所以我们称它为模板化，而不是模块化
+
+wxml模板的总结：
+1封装）将wxml代码用template标签包裹好，并在template标签上加上name属性，放在post-template.wxml文件中
+2引入）
+    在要引入的wxml文件中，<import src="../template/post-template.wxml" />
+    在要引入的位置的放上template标签，用is="名字" 指定设置好的name属性值，用data="{{ item }}"传入数据
+
+wxss模板的总结：
+1封装）直接将相关的wxss样式代码复制粘贴到post-template.wxss文件中
+2引入）在要引入的wxss文件中，@import "../template/post-template.wxss";
+
+2、引入js文件的方法跟nodejs的模块化一样，用exports导出和require引入，但注意require引入的路径只能是相对路径
+
+3、template是实现模板化编程，即只能封装wxml和css代码成为一块单独的模板，而自定义组件是模块化编程，
+可以封装wxml、wxss、js为一个单独的模块，真正实现模块化编程，但自定义组件比template要复杂一点，所以适合用于
+较复杂多页面的程序，而template适合用于简单的，只需要封装wxml和wxss代码的模板
+
+4、不能在template标签上添加事件监听，因为template标签是模板元素，会被替换掉，所以一般我们用view包裹它，
+然后在它将事件绑定在它上面
+
+5、
+1）小程序要在js数据层拿数据到视图层，是利用数据数据绑定，即在js文件的data对象里定义数据，在wxml中利用{{}}访问；
+2）若要将视图层的数据拿到数据层，可以利用自定义属性，自定义属性以data-开头，具体方法是：
+eg：  1）在wxml中：
+        <view catch:tap="fn" data-postid="{{ item.postId }}"></view>
+      2）在js文件中：
+        fn(event) {
+            var postId = event.currentTarget.dataset.postid;
+            // 利用该条函数获取事件对象.节点对象.自定义属性集合.某个自定义属性
+        }
+    这样我们就从视图层拿数据到数据层了，注意，这里面的关键是自定义属性，以及在js文件中来获取该自定义属性值的函数
+
+6、设置绝对定位、相对定位、浮动的元素便是脱离了文档流
+
+7、实现子容器在父级容器中心位置：
+father-div {
+    position: relative;
+}
+
+son-div {
+    width: 600rpx;
+    height: 2px; /* 这里不能让线随屏幕增大而变粗，所以最好用px固定的 */
+    background-color: #e5e5e5;
+    /* 下面代码设置让line在页面居中，只有设置父级元素position: relative;，才能实现在父级容器居中 */
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+8、前面讲到数据在视图层以及数据层之间进行传输的方法，还有一种是数据层的数据如何从一个js文件传到另一个js文件
+
+9、可以在小程序的调试窗口下的console下看输出或错误提醒，在sources下进行断点调试，在AppData下看到进行数据绑定的数据
+
+10、小程序缓存机制，小程序提供4种与缓存相关的操作，由于每种操作都有同步和异步两种函数，所以总共就有8个函数，带Sync的为同步
+    1）wx.setStorageSync("key名", Object/String)：设置缓存
+    2）wx.getStorageSync("key名")：得到指定缓存的数据
+    3）wx.removeStorageSync("key名")：删除指定缓存
+    4）wx.clearStorageSync()：删除缓存中的所有内容
+
+注意：缓存内容可以在调试窗口的Storage下查看，且若不主动地删除缓存，无论项目重启，缓存内容也还是存在的，
+缓存内容大小上线不超过10MB，但一般不会超过的
+
+11、跳转页面是先执行生命周期函数的页面加载函数，这个时候onLoad函数拿不到data对象里的数据的，
+但可以通过this.data.xxx=xxx来将某个变量传给data对象，也可以通过this.setData方法将数据发送到data对象
+注意，小程序访问data数据是用this.data，而vue访问data对象数据是用this.
+
+12、可以用缓存功能实现文章的收藏功能

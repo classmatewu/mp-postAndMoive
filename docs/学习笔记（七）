@@ -1,0 +1,76 @@
+1、小程序有三种传参类型：
+1）数据层向视图层：利用数据绑定，数据层将数据定义在data对象中，然后在视图层写：{{}}  /  "{{}}"
+
+2）视图层向数据层：利用自定义属性data-xxx，在视图层自定义属性data-xxx，然后在数据层在事件监听函数dianji(event)中用函数：
+                    1）var xxx = event.currentTarget.dataset.xxx    事件.捕获事件节点.所有自定义属性节点.所要找的自定义属性
+                    2）var xxx = event.target.dataset.xxx     事件.捕获事件节点.所有自定义属性节点.所要找的自定义属性
+                    两者的区别在于currentTarget是指事件捕获的节点，target指触发事件的节点，根据自定义属性data-xxx写在
+                    哪个节点，看那个节点是触发事件节点还是捕获事假节点进而进行选择
+注意，自定义属性data-xxx 后面的xxx无论大小写，在数据层的获取函数中都要写成小写，所以一般自定义属性后面的xxx我们都写成全小写
+
+3）数据层向数据层：一个页面跳转到另一个页面，并将某一个参数传递过去，我们可以利用url地址进行传参
+                    url: "more-movies/more-movies?xxx=" + xxx;
+                然后在跳转的页面js中的onLoad(options)中获取： var xxx = options.xxx;
+
+2、设置导航栏标题文字是在json文件配置中写"navigationBarTitleText": "文与字",但这种方式设置的导航栏标题文字是
+静态固定的，即标题文字写死在里面，不会随着某些设置的情况而改变，若要设置动态的文字标题，则可以用函数：
+            wx.setNavigationBarTitle{
+                title: title,
+                success() {
+                    
+                }
+            }
+将这条函数写在js文件的onReady()函数里，因为根据小程序页面的生命周期函数，onReady()才是页面准备好时的稳定状况
+
+3、在wxml文件中用template标签引入字模板，在template标签上只能进行数据的传递，写其他的例如循环指令都无效，因为
+template标签会被替换掉的，要在template标签上加循环指令：在template上包裹一个block标签，然后在block标签上写循环指令
+要在template标签上加class类名等：在template上包裹一个view标签，然后在view标签上定义class类名
+
+4、scroll-view标签组件，代替某个view容器，让页面变成可滚动视图区域
+设置该组件的一些属性的true or false可以实现，例如可纵向滚动，页面触底触发事件等
+注意，实现触发触底函数时必须给scroll-view容器一个高度，这样当达到这个高度底时它才能感应到触底了，这个高度一般是height: 1300rpx;
+
+5、var inTheatersUrl = "http://t.yushu.im/v2/movie/in_theaters" + "?start=0&count=3";
++号前面是要请求的正在热映电影数据的api地址，后面"?start=0&count=3"意思是指定取从0开始后3条数据，
+若不指定，则默认就是从0开始后20条数据
+
+6、实现上滑刷新数据：
+1）在触底事件触发函数里，改变一下url的start值，再进入获取数据的函数，再将每次的count累加20
+2）注意，要将每次刷新得到的数据与之前的数据合起开，再更新到data对象中
+
+7、相对路径要加./ 或 ../ 
+    绝对路径要加/
+
+8、在debug中也终于明白了 this.setData({});  函数
+其实就如它的名字一样，set the data对象，但并不是完全地set，而是将参数传进去，不影响原有的
+参数{}，里的内容就是直接传到data对象下的内容
+注意，一般设置data中数值的值我们才用this.data.xxx = ，设置对象一般用this.setData({})，数组也是对象
+
+9、当上拉加载更多时，在顶部导航栏文字旁出现加载图标：wx.showNavigationBarLoading();
+ 当数据更新成功后，顶部导航栏文字旁的加载图标消失：wx.hideNavigationBarLoading();
+
+10、实现上滑触底事件监听有两种方法：
+1）使用scroll-view标签组件，作为页面的最底层容器，并设置属性scroll-y=true（这里注意，不加""，则true才是布尔值），
+bindscrolltolower="load"，即设置允许纵向滚动，和监听触底事件，绑定load(event)函数，触底时触发，
+将load(event)函数写在对应的js文件中
+注意，1）要实现还的设置scroll-view容器样式height:1300rpx;
+
+2）还是使用常用view标签作为底层容器，当触底事件执行时会触发onReachBottom(event)函数，
+将onReachBottom(event)函数写在对应的js文件中
+
+11、实现下拉刷新事件监听的一种方法：
+在.json配置文件中加入"enablePullDownRefresh": true;
+（注意1：写在全局app的windows下，则全部页面都可以实现下拉效果，若在页面的json文件中，则只能该页面实现下拉效果
+注意2：true必须是布尔值，即不能加""）
+然后当下拉刷新时，就会触发onPullDownRefresh(event)函数，将该函数写在js文件中
+
+另外，json文件中的"backgroundColor"属性值可以设置下拉后页面的背景色
+
+12、
+注意，当页面只有监听上滑触底事件而没有实现下拉刷新时，则选择10中的1）实现上滑触底
+若一个页面既要实现上滑触底，又要实现下拉刷新，则不能选择10的1）和11，因为height:1300rpx;会冲突，影响到下拉刷新；
+只能选择10的2）加11实现
+
+13、小程序中所有的json配置文件要求都很严格，不能有任何注释，以及代码也有严格样式规范，不规范很容易报错
+
+14、循环指令wx:for  wx:for-item  若没有wx:key则会警告

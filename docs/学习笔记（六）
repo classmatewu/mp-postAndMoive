@@ -1,0 +1,27 @@
+1、调节容器样式时，若对容器大小把握不下来，可以通过设置容器的背景颜色来直观看到，再进行调整，这样方便很多
+
+2、普通函数、箭头函数以及怎么用this的问题、
+以及小程序this.data  与  vue中this.
+
+3、在template组件中传递数据，template标签写上 data="{{  }}" 来进行传递，
+且传递数据时，基本所有的变量都是要加{{}}，除了循环的wx:for-item:"name"不用，因为这里name是给item命名，而不是传递数据
+注意，在标签的属性内则要加"{{}}"，循环template要用block标签包裹起来，并将循环wx:for指令写在block标签上
+详情见sevenDemo1的movie-index.html的template组件的传参
+
+4、写前端代码时，先用一些固定的信息填充在html中，
+利用api函数获取服务器数据到本地后，先打印观察这些数据，进行整理提取自己所需要的信息，（这部分写在js的onLoad函数里）
+将整理提取到的信息发送到data对象，利用数据绑定{{}}，在html引用js的data对象中的数据
+
+5、调试器的AppData下可以查看程序里data对象的值
+
+6、block标签是怎么样一种存在
+循环元素时要写wx:for时，一般包裹一个bolck标签，将wx:for指令写在上面，为什么不用view标签呢
+
+7、wx:if   wx:elif   wx:else
+   <image wx:if="{{ i==1 }}" src=""></image>
+   <image wx:elif="{{ i==2 }}" src=""></image>
+   <image wx:elif="{{ i==3 }}" src=""></image>
+   <image wx:else src=""></image>
+
+8、 var String = String.substring(起始位, 结束位);
+截取String字符串的第[起始位]-第[结束位],注意，包括起始位但不包括结束位

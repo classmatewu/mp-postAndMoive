@@ -1,0 +1,96 @@
+1、wx.showToast({
+        title: "文字说明",
+        duration: 1000, // 设置时长，默认是1500ms
+        icon: "success", // 成功图标、loading为加载图标
+        // 成功时执行的函数
+        success() {
+
+        }
+        ...
+   });
+wx.showToast({})函数是小程序的API函数，给用户提供交互提醒，例如收藏成功等
+
+2、wx.showMoadl({
+        title: "模态框标题",
+        content: "内容",
+        确认按钮文字及颜色，
+        取消按钮文字及颜色
+        ...
+   });
+
+Toast是会自动关闭的，而模态框则是需要用户需要用户去点击才能进一步执行的
+
+3、分享功能API函数 wx.xxxxx
+
+4、bind:tap 与 catch:tap 区别：
+两者都是用于事件绑定，区别在于catchtap可以阻止冒泡行为，在catchtap元素处打断冒泡行为
+eg：<view1 catch:tap="fn">
+        <view2 bind:tap="fn">
+            <text2 bind:tap="fn"></text>
+        </view2>
+        <view3 catch:tap="fn">
+            <text3 bind:tap="fn"></text>
+        </view3>
+    </view1>
+上面例子中若点击了text2和text3，由于都是bindtap，所以不阻止冒泡，会往上冒，
+所以view2和view3的时间都能触发，但由于view2是bindtap、而view3是catchtap会阻止冒泡，
+所以view2时间会继续往上冒，而view3就在该层停止了
+
+5、三种主要的路由API函数
+    1) wx.navigateTo({
+            url: ".../posts/post"
+       });
+    表示跳转到指定页面，且可以返回
+
+    2) wx.redirectTo({
+            url: ".../posts/post"
+       });
+    表示跳转到指定页面，且不可以返回
+
+    3) wx.switchTab({
+            url: ".../posts/post"
+       });
+    表示跳转到指定的tab栏页面，注意这里是tab栏页面，当跳转到的页面是一个tab栏页面，则只能用3），否则优先选择1）和2）
+
+6、tabBar导航栏组件，写在app.json文件中：
+
+    "tabBar": {
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/posts/post-index/post-index",
+                "text": "阅读",
+                "iconPath": "/images/tab/yuedu.png",
+                "selectedIconPath": "images/tab/yuedu_hl.png"
+            },
+            {
+                "pagePath": "pages/movies/movie-index/movie-index",
+                "text": "电影",
+                "iconPath": "/images/tab/dianying.png",
+                "selectedIconPath": "images/tab/dianying_hl.png"
+            }
+        ]
+    }
+
+7、利用api接口获取服务器信息：
+Page({
+    // restful API json
+    // 粒度
+    
+    onLoad(event) {
+        console.log("hahahaha");
+        wx.request({
+            url: 'http://t.yushu.im/v2/movie/top250',
+            data: {},
+            method: "GET",
+            header: {
+                "Content-Type": "json",
+            },
+            success(res) {
+                console.log(res);
+            }
+
+        })
+    }
+
+})

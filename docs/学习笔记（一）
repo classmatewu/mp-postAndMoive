@@ -1,0 +1,37 @@
+1、在iphone6下，1px = 2rpx
+rpx是小程序特有的单位尺寸，它可以根据不同机型分辨率尺寸进行自适应
+2、view组件类似div元素，text类似p元素
+3、小程序文件有几种，分别是
+全局的应用程序文件app——app.json、app.js、app.xwss、process.config.json
+各个页面文件—— .json、 .js、 .wxml、 .wxss
+4、全局的应用程序文件作用于全局，各个页面文件作用于各个页面，可以覆盖全局的设置
+5、.json可以理解为文件的说明文件，是文件的配置文件
+   .js是js文件，编写逻辑层代码
+   .wxml相当于.html文件，是页面的骨架
+   .wxss相当于.css文件，是页面的样式文件
+6、flex布局   又称弹性盒子模型
+<view class="container"></view>
+.container {
+    display: flex; //这样就将布局设置为了flex，然后就可以运用flex布局的样式了
+    flex-direction: column; //将view容器里的所有元素在页面上都成列排布
+    align-items: center; //将view容器中的所有元素都处在页面中轴线上
+}
+运用好flex布局对页面的样式布局很有帮助，很方便
+7、注意，每个页面文件最外层其实是有一个page元素的，我们可以利用这个元素对页面整体设置样式
+例如，我们若对页面的view设置样式会发现其实并不是100%的，view的大小是根据view里的元素决定的，
+所以要设置整体页面样式我们可以：
+page {
+    background-color: #123456;
+    height: 100%;
+}
+8、在运行一个小程序demo时，以下文件需要注意
+    1）app.json：这是项目的入口，必须包含项目的页面信息，
+            eg：pages: {
+                pages/index/index,
+                pages/logs/logs
+            }
+    2）各个页面的.json文件，注意各个页面的.json文件不是必须的，但如果有，就一定至少要有{}，否则会报错
+    3）各个页面的计算.js文件，注意各个页面的js也是不能为空的，至少要有Pages({})，否则会报错
+注意，json文件都是项目的配置文件，都不能写注释
+9、navigationBarBackgroundColor在json文件中的Windows对象中设置顶部导航栏的背景颜色
+    

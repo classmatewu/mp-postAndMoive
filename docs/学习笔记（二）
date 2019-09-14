@@ -1,0 +1,110 @@
+1、通常文章标题的字体color设置为#333，而正文字体的颜色一般为#666
+2、用flex可以实现容器内的元素的在水平居中（即元素列排布，并位于水平线中轴线上），
+也可以实现垂直居中（即元素行排布，并位于垂直线中轴线上）
+    1）水平居中
+    .container {
+        display: flex; flex布局
+        flex-direction: column;  容器内元素列排布
+        align-items: center; 容器内元素位于页面水平中轴线上
+    }
+    2）垂直居中
+    .container {
+        display: flex; flex布局
+        flex-direction: row;  容器内元素行排布
+        align-items: center; 容器内元素位于页面垂直中轴线上
+    }
+3、编辑页面代码及css样式时，首先应该有个全局观，先分析整理一下页面的整体布局，分模块编写
+例如顶部轮播图为一部分，中间文章部分为一部分，顶部评论栏为一部分；且在每一部分编写时又可以将
+这一部分看成一整体再来细分，可以将一行一行地再分模块，分析好整体布局思路再进行html及css代码的编写
+4、在iphone机型下，1px = 2rpx，但px的大小是固定的，而rpx的大小则是可以自适应的，所以在大多数情况
+下，优先选择用rpx
+5、若图片的宽度要占满整个屏幕，则我们一般设置它的宽度width: 100%
+6、letter-spacing为设置文本文字的间距，正文文本间距一般为2rpx
+7、CSS行内元素、块级元素以及盒子模型
+行内元素设置width无效，height无效(可以设置line-height)，margin上下无效，padding上下无效
+8、小程序跟vue等前端框架类似，是以数据优先的，即vue原则上是尽量不去操作MOD节点的，而小程序直接就是根本
+无法操作DOM，小程序跟vue等前端框架类似，利用数据绑定，插值表达式的形式去把数据从js逻辑层传到视图层
+注意，当数据绑定是在元素的属性上时，则要加上""，例如src="{{ image }}"
+而元素上的数据绑定则直接利用插值表达式就可以，例如<p>{{ num }}</p>
+9、小程序的页面生命周期函数：
+onLoad：监听页面加载
+onShow：监听页面显示
+onReady：监听页面初次渲染完成
+onHide：监听页面隐藏
+onUnLoad：监听页面卸载
+10、{{}}里的内容其实就是有个js表达式
+11、在vue中，如果从js数据层拿数据后是在要用在元素的一对标签的中间的话，是用插值表达式，即{{}}
+但若该数据是要绑定在标签的属性上的话，vue用了一个：即数据绑定，eg：<p v-show="flag">{{ num }}</p>；
+但在小程序中，不管是在标签内还是绑定在属性上，都是用双花括号{{}}，但注意在属性上是话一定要在{{}}外加""；
+eg：<p wx-for="{{ flag }}">{{ num }}</p>
+12、条件渲染(即if语句)wx:if  与  列表渲染(即循环语句)wx:for    类似于vue的    v-if  和  v-for
+条件渲染：<view wx:if="{{flag}}"></view>
+列表渲染：<view wx:for="{{array}}" wx:for-item="item" wx:for-index="index"></view>
+列表渲染中的wx:for-item="item" wx:for-index="index"，若这两句删除，则默认也是item和index
+注意，这里item和index不用加{{}}，因为它不是从数据层data中取的，从数据层取的数据就一定要加{{}}
+13、vue和小程序中，从数据层取数据到视图层，一定只能从data对象中取，所以一定要将数据写在data对象中，
+从服务器取的数据也要利用this.setData();方法吧数据发送到data对象中
+14、注意this.setData();传入的参数一定是一个对象，
+    1）var player = {
+        date: 123,
+        name: "skjldj",
+        team: "dljflkdsj"
+    };
+
+    this.setData(player); 意味将james对象传到data对象里，所以等同与data对象中有
+    data: {
+        date: 123,
+        name: "skjldj",
+        team: "dljflkdsj"
+    }
+
+    2)var player: [
+        {
+            date: 123,
+            name: "skjldj",
+            team: "dljflkdsj"
+        },
+        {
+            num: 32,
+            name: "lksjfdsl",
+            team: "lkjks"
+        },
+        {
+            num: 32,
+            name: "lksjfdsl",
+            team: "lkjks"
+        }
+    ]
+
+    那么当player是一个数组而不是一个对象时，我们应该：
+    this.setData({
+        array: player
+        // es6语法中，我们可以直接player   这样就相当于player: player
+    })
+    即等同于data中：
+    data: {
+        array: [
+            .....
+            
+        ]
+    }
+
+注意：1）传入后可直接通过变量名来访问，而不需要通过对象.来访问
+      2）传入后不可以直接通过变量名来访问，而需要通过对象.来访问，若该对象数组有多项时，则在循环中item.xxx来访问
+
+总之，this.setData();  的参数一定是要是对象，若不是对象，则要采用2）的写法让它变成一个对象，同时赋给它一个名字
+
+14、注意，全局的json文件有"pages"、"window"等多个对象，但在各个页面的json文件中是只能使用window的部分属性的，
+所以各个页面的json文件就只有一个对象，这个对象就是window，且全局json文件中得配置程序的入口，即pages对象，
+各个页面的则至少得有{}，否则会报错
+15、小程序事件绑定用bindtag="函数名"/bind:tap="函数名"进行事件绑定，bind:是冒泡机制，
+还有一个是catch:用于事件绑定且阻止冒泡行为
+16、进入页面函数小程序提供了两个，分别是wx.redirectTo()和wx.navigateTo(),参数是对象
+        eg:     wx.redirectTo({
+                    url: "../pages/welcome/welcome"  // 从当前页面找要跳转的页面
+                 })
+    1)wx.redirectTo(Object object): 关闭当前页面，跳转到应用内的某个页面,但是不允许跳转到 tabbar 页面
+    2)wx.navigateTo(Object object): 保留当前页面，跳转到应用内的某个页面,但是不能跳到 tabbar 页面
+        使用 wx.navigateBack 可以返回到原页面,小程序中页面栈最多十层.
+一个能返回一个不能返回，本质原因一个是执行小程序的生命周期函数的页面隐藏函数，一个是执行页面卸载函数。
+17、其实学小程序主要的就是在学组件和API接口函数
